@@ -1,3 +1,4 @@
+"use client"
 import { useState, FormEvent } from 'react';
 import { QrCode, CreditCard, Heart, ArrowRight, CheckCircle, Smartphone, AlertCircle, Copy } from 'lucide-react';
 
@@ -11,6 +12,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
   const [copiedBank, setCopiedBank] = useState<string | null>(null);
   const [simulatedRecordPosted, setSimulatedRecordPosted] = useState(false);
   const [donorName, setDonorName] = useState('Hamba Allah');
+
 
   const suggestedAmounts = [25000, 50000, 100000, 250000, 500000];
 
@@ -36,15 +38,29 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
       return;
     }
 
-    onSimulateDonation(finalAmount, `Donasi Online QRIS (${donorName})`);
-    
-    setSimulatedRecordPosted(true);
-    setTimeout(() => {
-      setSimulatedRecordPosted(false);
-      setDonorName('Hamba Allah');
-      setDonateAmount('100000');
-      setCustomAmount('');
-    }, 4000);
+    const phoneNumber = "6281219118993";
+    const message = "Assalamualaikum Admin Masjid Al-Muttaqin 👋" +
+      "Saya ingin mengonfirmasi bahwa saya telah/akan menyalurkan infaq." +
+      `*Detail Donatur:*` +
+      `• Nama: ${donorName}` +
+      `• Nominal: *${formatRupiah(finalAmount)}*` +
+      `• Metode: QRIS / Transfer Bank` +
+      "Mohon bantuannya untuk diverifikasi. Terima kasih, Jazakumullah Khairan Katsiran.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+    setCustomAmount('');
+    setDonateAmount('100000');
+    setDonorName('');
+
+    // onSimulateDonation(finalAmount, `Donasi Online QRIS (${donorName})`);
+    // setSimulatedRecordPosted(true);
+    // setTimeout(() => {
+    //   setSimulatedRecordPosted(false);
+    //   setDonorName('Hamba Allah');
+    //   setDonateAmount('100000');
+    //   setCustomAmount('');
+    // }, 4000);
   };
 
   const formatRupiah = (val: number) => {
@@ -58,7 +74,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
 
   return (
     <section id="donasi" className="py-20 emerald-gradient text-white relative overflow-hidden">
-      
+
       {/* Decorative Blur Backdrops */}
       <div className="absolute top-1/4 -left-12 w-80 h-80 bg-emerald-800/40 rounded-full blur-3xl z-0" />
       <div className="absolute bottom-1/4 -right-12 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl z-0" />
@@ -80,13 +96,13 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
 
         {/* Main Donation Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          
+
           {/* Left Block: QRIS Dynamic Generator Mockup */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            
+
             {/* Elegant QRIS Codeboard Stand card */}
             <div className="bg-white text-gray-900 rounded-3xl p-6 shadow-2xl max-w-sm w-full border-4 border-amber-400 relative overflow-hidden flex flex-col items-center">
-              
+
               {/* QRIS Header Sticker */}
               <div className="w-full bg-emerald-900 text-center py-2.5 rounded-xl text-white font-extrabold text-sm tracking-widest flex items-center justify-center gap-1.5 mb-4">
                 <QrCode className="w-5 h-5 text-amber-400" />
@@ -144,8 +160,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
                   </svg>
                 </div>
 
-                {/* Laser scan animation line overlay */}
-                <div className="absolute inset-x-0 h-1 bg-amber-400 opacity-60 animate-bounce" style={{ top: '15%', animationDuration: '3s' }} />
+
               </div>
 
               {/* Dynamic QRIS Indicator */}
@@ -167,7 +182,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
 
           {/* Right Block: Amount Picker & Bank Transfer Details */}
           <div className="lg:col-span-7 space-y-8">
-            
+
             {/* Donation Simulated Calculator */}
             <form onSubmit={handleSimulateDonationSubmit} className="bg-emerald-900/30 border border-emerald-800 rounded-2xl p-6.5 space-y-6">
               <h3 className="text-lg font-bold flex items-center gap-2">
@@ -176,7 +191,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
               </h3>
 
               <div className="space-y-4">
-                
+
                 {/* Donor Name input */}
                 <div>
                   <label className="block text-[11px] font-bold text-emerald-300 uppercase tracking-wider mb-1">
@@ -207,11 +222,10 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
                             setDonateAmount(String(amt));
                             setCustomAmount('');
                           }}
-                          className={`py-2 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
-                            isSelected
-                              ? 'bg-amber-400 text-emerald-950 font-black shadow-lg shadow-amber-400/10'
-                              : 'bg-emerald-950 hover:bg-emerald-800 border border-emerald-800 text-emerald-200'
-                          }`}
+                          className={`py-2 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${isSelected
+                            ? 'bg-amber-400 text-emerald-950 font-black shadow-lg shadow-amber-400/10'
+                            : 'bg-emerald-950 hover:bg-emerald-800 border border-emerald-800 text-emerald-200'
+                            }`}
                         >
                           {formatRupiah(amt)}
                         </button>
@@ -220,11 +234,10 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
                     <button
                       type="button"
                       onClick={() => setDonateAmount('Lainnya')}
-                      className={`py-2 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${
-                        donateAmount === 'Lainnya'
-                          ? 'bg-amber-400 text-emerald-950 font-black'
-                          : 'bg-emerald-950 hover:bg-emerald-800 border border-emerald-800 text-emerald-200'
-                      }`}
+                      className={`py-2 rounded-xl text-xs font-bold transition duration-150 cursor-pointer ${donateAmount === 'Lainnya'
+                        ? 'bg-amber-400 text-emerald-950 font-black'
+                        : 'bg-emerald-950 hover:bg-emerald-800 border border-emerald-800 text-emerald-200'
+                        }`}
                     >
                       Nominal Kustom
                     </button>
@@ -274,7 +287,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
                   </button>
                 )}
                 <p className="text-[10px] text-emerald-300/80 text-center mt-3 leading-tight italic">
-                  * Tombol konfirmasi di atas memfasilitasi simulasi interaktif kami. Mengkliknya akan langsung mendebit nominal donasi Anda ke Buku Kas Transparansi di atas dalam sesi pengujian Anda!
+                  * Tombol konfirmasi di atas memfasilitasi anda untuk mengkonfirmasi melalui whatsapp admin
                 </p>
               </div>
             </form>
@@ -298,7 +311,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
                     <span className="block text-sm font-extrabold tracking-wider font-mono text-white mt-1">712 345 6112</span>
                     <span className="block text-[10px] text-emerald-300/80 mt-0.5">Yayasan Dewan Kemakmuran Masjid Al-Muttaqin</span>
                   </div>
-                  
+
                   <button
                     onClick={() => handleCopyBankAccount('7123456112')}
                     className="absolute bottom-4 right-4 bg-emerald-900 hover:bg-emerald-800 rounded p-1.5 text-emerald-300 transition cursor-pointer"
