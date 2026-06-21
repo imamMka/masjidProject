@@ -4,6 +4,7 @@ import { BookOpen, User, Sparkles, Copy, Check } from 'lucide-react';
 
 export default function FridaySermonSection() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   const handleCopy = (id: string, theme: string, khatib: string, date: string) => {
     const textToCopy = `*INFO JUMAT MASJID RAYA PURI TELUKJAMBE*\n📅 Tanggal: ${date}\n🎙️ Khatib: ${khatib}\n📖 Tema: "${theme}"\nMari bersiap bergegas menghadiri shalat jumat berjamaah tepat waktu.`;
@@ -34,6 +35,7 @@ export default function FridaySermonSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {FRIDAY_SERMONS.map((sermon, idx) => {
             const isFirst = idx === 0;
+            const isHiddenOnMobile = idx >= 1 && !showAllMobile;
 
             return (
               <div
@@ -42,7 +44,7 @@ export default function FridaySermonSection() {
                 className={`p-6 rounded-3xl transition-all border ${isFirst
                   ? 'emerald-gradient text-white border-emerald-800 card-shadow relative overflow-hidden'
                   : 'bg-white text-slate-800 border-slate-100 card-shadow'
-                  }`}
+                  } ${isHiddenOnMobile ? 'hidden md:block' : 'block'}`}
               >
                 {/* Decorative glow indicator for the upcoming weekly sermon */}
                 {isFirst && (
@@ -140,6 +142,17 @@ export default function FridaySermonSection() {
             );
           })}
         </div>
+
+        {!showAllMobile && FRIDAY_SERMONS.length > 1 && (
+          <div className="mt-8 flex justify-center md:hidden">
+            <button
+              onClick={() => setShowAllMobile(true)}
+              className="px-6 py-2.5 bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 font-bold rounded-xl transition text-sm cursor-pointer shadow-sm"
+            >
+              Lihat selengkapnya
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

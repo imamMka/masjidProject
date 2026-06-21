@@ -13,7 +13,7 @@ import DonationSection from './components/DonationSection';
 import GallerySection from './components/GallerySection';
 
 // Lucide Icons
-import { Menu, X, Landmark, Phone, Mail, MapPin, Heart, ChevronUp, Share2, Compass, HelpCircle, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Menu, X, Landmark, Phone, Mail, MapPin, Heart, ChevronUp, Share2, Compass, HelpCircle, Instagram, Facebook, Youtube, MessageCircle } from 'lucide-react';
 
 export default function App() {
   const [events, setEvents] = useState<EventActivity[]>(INITIAL_EVENTS);
@@ -106,6 +106,17 @@ export default function App() {
           <ChevronUp className="w-5 h-5 font-bold" />
         </button>
       )}
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/62895414283161?text=Assalamualaikum...%20Saya%20ingin%20bertanya%20seputar%20Masjid%20Raya%20Puri%20Telukjambe."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-20 right-6 z-40 bg-[#25D366] hover:bg-[#128C7E] text-white p-3 rounded-full transition-all duration-300 shadow-xl cursor-pointer hover:scale-105 active:scale-95 flex items-center justify-center border border-[#128C7E]"
+        title="Hubungi via WhatsApp"
+      >
+        <MessageCircle className="w-5 h-5 font-bold" />
+      </a>
 
       {/* DKM Top Announcement Bar */}
       <div className="bg-emerald-900 border-b border-emerald-800 text-emerald-100 py-2.5 px-4 text-center text-xs font-semibold relative z-50">

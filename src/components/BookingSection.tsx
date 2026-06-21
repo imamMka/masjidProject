@@ -178,21 +178,12 @@ export default function BookingSection() {
 
           <div className="flex flex-col gap-4">
             <a
-              href="https://wa.me/6285210535379."
+              href="https://wa.me/6281218595315."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full md:w-auto text-center shrink-0 bg-amber-500 hover:bg-amber-600 text-emerald-950 font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-amber-500/10 cursor-pointer relative z-10"
             >
-              Hubungi Admin Aula 1
-            </a>
-
-            <a
-              href="https://wa.me/6285210535379."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full md:w-auto text-center shrink-0 bg-amber-500 hover:bg-amber-600 text-emerald-950 font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-amber-500/10 cursor-pointer relative z-10"
-            >
-              Hubungi Admin Aula 2
+              Hubungi Admin Aula
             </a>
           </div>
 

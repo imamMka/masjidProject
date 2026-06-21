@@ -13,6 +13,7 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
   const [registeringEvent, setRegisteringEvent] = useState<EventActivity | null>(null);
   const [regForm, setRegForm] = useState({ name: '', phone: '' });
   const [regSuccess, setRegSuccess] = useState(false);
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   // Filters
   const filteredEvents = events.filter((evt) => {
@@ -41,7 +42,7 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
   };
 
   const handleRegisterWhatsApp = (evt: EventActivity) => {
-    const waNumber = "6281219118993"; // dari 081219118993
+    const waNumber = "62895414283161"; // dari 081219118993
     const message = `Assalamualaikum Admin, saya ingin mendaftar untuk mengikuti kegiatan:\n\n*${evt.title}*\nTanggal: ${evt.date}\nWaktu: ${evt.time}\n\nMohon informasi selanjutnya.`;
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank', 'noopener,noreferrer');
@@ -108,14 +109,15 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6.5">
-            {filteredEvents.map((evt) => {
+            {filteredEvents.map((evt, index) => {
               const fillPercentage = evt.capacity ? Math.min(100, Math.floor((evt.registeredCount / evt.capacity) * 100)) : 100;
+              const isHiddenOnMobile = index >= 2 && !showAllMobile;
 
               return (
                 <div
                   key={evt.id}
                   id={`activity-card-${evt.id}`}
-                  className="bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all hover:-translate-y-0.5 card-shadow flex flex-col group h-full"
+                  className={`bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all hover:-translate-y-0.5 card-shadow flex-col group h-full ${isHiddenOnMobile ? 'hidden md:flex' : 'flex'}`}
                 >
                   {/* Card Banner */}
                   <div className="relative h-48 overflow-hidden bg-gray-100">
@@ -208,6 +210,17 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {!showAllMobile && filteredEvents.length > 2 && (
+          <div className="mt-8 flex justify-center md:hidden">
+            <button
+              onClick={() => setShowAllMobile(true)}
+              className="px-6 py-2.5 bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 font-bold rounded-xl transition text-sm cursor-pointer shadow-sm"
+            >
+              Lebih banyak
+            </button>
           </div>
         )}
 

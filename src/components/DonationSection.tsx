@@ -32,7 +32,7 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
       return;
     }
 
-    const phoneNumber = "6281219118993";
+    const phoneNumber = "62895414283161";
     const message = "Assalamualaikum Admin Masjid Raya Puri Telukjambe 👋" +
       "Saya ingin mengonfirmasi bahwa saya telah/akan menyalurkan infaq." +
       `*Detail Donatur:*` +
@@ -214,40 +214,26 @@ export default function DonationSection({ onSimulateDonation }: DonationSectionP
                 Jika Anda bermaksud menyalurkan dana infaq rutin bulanan dalam jumlah tertentu melalui autodebet atau m-banking dengan nominal tetap, silakan salurkan ke rekening DKM resmi berikut:
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="">
                 {/* Account 1 */}
-                <div className="bg-emerald-950/70 p-4 rounded-xl border border-emerald-800/50 flex flex-col justify-between relative group">
+                <div className="bg-emerald-950/70 p-4 rounded-xl border border-emerald-800/50 flex flex-col justify-between relative group w-full">
                   <div>
                     <span className="block text-[10px] font-bold text-emerald-300 uppercase tracking-widest">Bank Syariah Indonesia (BSI)</span>
-                    <span className="block text-sm font-extrabold tracking-wider font-mono text-white mt-1">712 345 6112</span>
-                    <span className="block text-[10px] text-emerald-300/80 mt-0.5">Yayasan Dewan Kemakmuran Masjid Raya Puri Telukjambe</span>
+                    <span className="block text-sm font-extrabold tracking-wider font-mono text-white mt-1">7140-259227</span>
+                    <span className="block text-[10px] text-emerald-300/80 mt-0.5"> A/N UPZ Masjid Raya Puri Telukjambe</span>
                   </div>
 
                   <button
-                    onClick={() => handleCopyBankAccount('7123456112')}
+                    onClick={() => handleCopyBankAccount('7140-259227')}
                     className="absolute bottom-4 right-4 bg-emerald-900 hover:bg-emerald-800 rounded p-1.5 text-emerald-300 transition cursor-pointer"
                     title="Salin No. Rekening"
                   >
-                    {copiedBank === '7123456112' ? <span className="text-[10px] text-amber-400 font-bold">Salin!</span> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedBank === '7140-259227' ? <span className="text-[10px] text-amber-400 font-bold">Salin!</span> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
 
                 {/* Account 2 */}
-                <div className="bg-emerald-950/70 p-4 rounded-xl border border-emerald-800/50 flex flex-col justify-between relative group">
-                  <div>
-                    <span className="block text-[10px] font-bold text-emerald-300 uppercase tracking-widest">Bank Muamalat Indonesia (BMI)</span>
-                    <span className="block text-sm font-extrabold tracking-wider font-mono text-white mt-1">328 000 4561</span>
-                    <span className="block text-[10px] text-emerald-300/80 mt-0.5">Keuangan Kas Operasional DKM Masjid Raya Puri Telukjambe</span>
-                  </div>
 
-                  <button
-                    onClick={() => handleCopyBankAccount('3280004561')}
-                    className="absolute bottom-4 right-4 bg-emerald-900 hover:bg-emerald-800 rounded p-1.5 text-emerald-300 transition cursor-pointer"
-                    title="Salin No. Rekening"
-                  >
-                    {copiedBank === '3280004561' ? <span className="text-[10px] text-amber-400 font-bold">Salin!</span> : <Copy className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
               </div>
 
               <div className="flex items-center gap-2 text-[10px] text-emerald-300/80 bg-emerald-950/40 p-2.5 rounded-lg border border-emerald-900">
