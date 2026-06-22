@@ -9,31 +9,31 @@ interface EventSectionProps {
 
 const getEventStatus = (dateStr: string) => {
   if (dateStr.toLowerCase().includes('setiap')) return { passed: false, liveStreamReady: true };
-  
+
   let cleanDate = dateStr.replace(/(Ahad|Senin|Selasa|Rabu|Kamis|Jumat|Sabtu|Minggu),?/i, '').trim();
-  
+
   const months: Record<string, string> = {
-    'januari': 'Jan', 'februari': 'Feb', 'maret': 'Mar', 'april': 'Apr', 
-    'mei': 'May', 'juni': 'Jun', 'juli': 'Jul', 'agustus': 'Aug', 
+    'januari': 'Jan', 'februari': 'Feb', 'maret': 'Mar', 'april': 'Apr',
+    'mei': 'May', 'juni': 'Jun', 'juli': 'Jul', 'agustus': 'Aug',
     'september': 'Sep', 'oktober': 'Oct', 'november': 'Nov', 'desember': 'Dec'
   };
-  
+
   for (const [id, en] of Object.entries(months)) {
     if (cleanDate.toLowerCase().includes(id)) {
       cleanDate = cleanDate.toLowerCase().replace(id, en);
       break;
     }
   }
-  
+
   const eventDate = new Date(cleanDate);
   if (isNaN(eventDate.getTime())) return { passed: false, liveStreamReady: true };
-  
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  
+
   return {
     passed: eventDate < today,
     liveStreamReady: eventDate <= tomorrow
@@ -41,7 +41,7 @@ const getEventStatus = (dateStr: string) => {
 };
 
 export default function EventSection({ events, onRegisterEvent }: EventSectionProps) {
-  const [selectedCategory, setSelectedCategory] = useState<'Semua' | 'Dakwah' | 'Sosial'>('Semua');
+  const [selectedCategory, setSelectedCategory] = useState<'Semua' | 'Dakwah' | 'Dauroh'>('Semua');
   const [searchQuery, setSearchQuery] = useState('');
   const [registeringEvent, setRegisteringEvent] = useState<EventActivity | null>(null);
   const [regForm, setRegForm] = useState({ name: '', phone: '' });
@@ -81,6 +81,13 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const handleRegisterWhatsAppDauroh = (evt: EventActivity) => {
+    const waNumber = "6285216590900";
+    const message = `Assalamualaikum Admin, saya ingin mendaftar untuk mengikuti kegiatan Dauroh Quran:\n\n*${evt.title}*\nTanggal: ${evt.date}\nWaktu: ${evt.time}\n\nMohon informasi selanjutnya.`;
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <section id="kegiatan" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -92,10 +99,10 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
             <span>Program & Kegiatan</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight">
-            Syiar Dakwah & Kemaslahatan Sosial
+            Syiar Dakwah & Kegiatan Dauroh
           </h2>
           <p className="mt-3 text-base text-slate-600">
-            Temukan jadwal kajian ilmiah keislaman (Dakwah) dan inisiatif kepedulian nyata (Sosial) untuk bersama menggapai keridhaan Allah Ta'ala.
+            Temukan jadwal kajian ilmiah keislaman (Dakwah) dan inisiatif kepedulian nyata untuk bersama menggapai keridhaan Allah Ta'ala.
           </p>
         </div>
 
@@ -104,7 +111,7 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
 
           {/* Tabs */}
           <div className="flex bg-gray-100 p-1.5 rounded-xl w-full md:w-auto">
-            {['Semua', 'Dakwah', 'Sosial'].map((cat) => (
+            {['Semua', 'Dakwah', 'Dauroh'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat as any)}
@@ -113,7 +120,7 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
                   : 'text-gray-600 hover:text-emerald-700'
                   }`}
               >
-                {cat === 'Semua' ? 'Semua Kegiatan' : cat === 'Dakwah' ? '📖 Dakwah & Kajian' : '🤝 Sosial & Bakti'}
+                {cat === 'Semua' ? 'Semua Kegiatan' : cat === 'Dakwah' ? '📖 Dakwah & Kajian' : '🤝 Dauroh Al-Qur\'an '}
               </button>
             ))}
           </div>
@@ -243,7 +250,7 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
                       {!passed ? (
                         <button
                           id={`btn-register-${evt.id}`}
-                          onClick={() => handleRegisterWhatsApp(evt)}
+                          onClick={() => evt.category === 'Dauroh' ? handleRegisterWhatsAppDauroh(evt) : handleRegisterWhatsApp(evt)}
                           className="w-full bg-emerald-50 hover:bg-emerald-600 text-emerald-800 hover:text-white font-bold py-2.5 rounded-xl border border-emerald-100 hover:border-emerald-600 transition flex items-center justify-center gap-1.5 text-xs md:text-sm cursor-pointer group/btn"
                         >
                           <span>Ikuti Kegiatan</span>
@@ -280,9 +287,9 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
         <div className="mt-14 emerald-gradient text-white rounded-3xl p-6.5 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-800 card-shadow relative overflow-hidden">
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-amber-500/5 rounded-full blur-2xl" />
           <div className="space-y-2 relative z-10">
-            <h3 className="text-lg md:text-xl font-bold">Butuh Layanan Kedinasan atau Sosial Darurat?</h3>
+            <h3 className="text-lg md:text-xl font-bold">Butuh bantuan Ambulans Darurat?</h3>
             <p className="text-xs md:text-sm text-emerald-200">
-              Butuh bantuan ambulans darurat (Zakat/Santunan), bimbingan konseling syariah keluarga, atau pengantaran fardhu kifayah jenazah? Hubungi tim siaga DKM kami siap membantu 24 Jam.
+              Hubungi tim siaga DKM, Kami siap membantu anda.
             </p>
           </div>
           <a
@@ -294,7 +301,28 @@ export default function EventSection({ events, onRegisterEvent }: EventSectionPr
             Hubungi Siaga Sosial DKM
           </a>
         </div>
+
+        {/* Quick Help Box - Konsultasi Zakat */}
+        <div className="mt-5 emerald-gradient text-white rounded-3xl p-6.5 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-800 card-shadow relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-amber-500/5 rounded-full blur-2xl" />
+          <div className="space-y-2 relative z-10">
+            <h3 className="text-lg md:text-xl font-bold">Bingung Ingin Donasi Zakat, Infaq, Sedekah, Wakaf?</h3>
+            <p className="text-xs md:text-sm text-emerald-200">
+              Dapatkan panduan zakat pribadi, hitung zakat, atau tanyakan kehalalan donasi dari UPZ By Masjid Raya Puri Telukjambe.
+            </p>
+          </div>
+          <a
+            href="https://wa.me/6281380908156?text=Assalamualaikum%20Admin%20DKM%20Saya%20ingin%20konsultasi%20zakat"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full md:w-auto text-center shrink-0 border-1 border-white hover:bg-white hover:text-emerald-800 text-white font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-emerald-500/10 cursor-pointer relative z-10"
+          >
+            Hubungi Konsultasi Zakat
+          </a>
+        </div>
       </div>
+
+
 
       {/* Registration Modal Popup Dialog */}
       {registeringEvent && (

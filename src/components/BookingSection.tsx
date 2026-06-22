@@ -156,7 +156,7 @@ export default function BookingSection() {
                       onClick={() => handleWhatsapp()}
                       className="w-full py-2.5 rounded-xl font-bold text-xs md:text-sm transition cursor-pointer bg-emerald-50 hover:bg-emerald-100 text-emerald-800"
                     >
-                      Pilih Paket Ini
+                      Booking dan Tanya Detail
                     </button>
                     <p className='text-center mt-5 italic text-xs text-gray-500 font-medium'>* Tidak termasuk dekorasi, informasi detail lainnya, silahkan hubungi admin di kolom bawah</p>
                   </div>
@@ -178,7 +178,7 @@ export default function BookingSection() {
 
           <div className="flex flex-col gap-4">
             <a
-              href="https://wa.me/6281218595315."
+              href="https://wa.me/6281218595315"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full md:w-auto text-center shrink-0 bg-amber-500 hover:bg-amber-600 text-emerald-950 font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-amber-500/10 cursor-pointer relative z-10"

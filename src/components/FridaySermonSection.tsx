@@ -24,7 +24,7 @@ export default function FridaySermonSection() {
             Seksi Pembinaan Ibadah Jum'at
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight mt-3">
-            Jadwal Khatib & Imam Shalat Jum'at
+            Jadwal Imam & Khatib, Muadzin untuk 4 pekan kedepan
           </h2>
           <p className="mt-3 text-base text-slate-600">
             Daftar asatidzah, guru-guru mulia, dan al-hafiz pembina umat yang dijadwalkan mengisi khutbah shalat Jumat di Masjid Raya Puri Telukjambe untuk 4 pekan ke depan.

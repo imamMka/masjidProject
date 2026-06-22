@@ -1,0 +1,21 @@
+{
+  "name": "Masjid Raya Puri Telukjambe - Portal Resmi DKM",
+  "short_name": "MR Puri Telukjambe",
+  "description": "Portal resmi DKM Masjid Raya Puri Telukjambe Karawang. Jadwal kajian, donasi QRIS, sewa aula & layanan jamaah.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#064e3b",
+  "theme_color": "#064e3b",
+  "orientation": "portrait-primary",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["religion", "community", "social"],
+  "icons": [
+    {
+      "src": "/images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

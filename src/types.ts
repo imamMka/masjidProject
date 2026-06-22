@@ -1,7 +1,7 @@
 export interface EventActivity {
   id: string;
   title: string;
-  category: 'Dakwah' | 'Sosial';
+  category: 'Dakwah' | 'Dauroh';
   date: string;
   time: string;
   speaker?: string;

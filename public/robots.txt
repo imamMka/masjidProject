@@ -1,0 +1,12 @@
+# Robots.txt - Masjid Raya Puri Telukjambe
+# Allow all search engine crawlers full access
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://masjidrayapuritelukjambe.com/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /api/
+Disallow: /.env

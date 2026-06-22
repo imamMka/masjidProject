@@ -153,7 +153,7 @@ export default function App() {
           </div>
 
           {/* Desktop Sitemap Menu links */}
-          <nav className="hidden lg:flex items-center gap-6.5">
+          <nav className="hidden lg:flex items-center gap-6.5" aria-label="Menu utama">
             <button
               onClick={() => scrollToSection('hero')}
               className="text-xs uppercase font-extrabold tracking-wider text-emerald-100 hover:text-amber-400 transition cursor-pointer"
@@ -327,7 +327,7 @@ export default function App() {
       )}
 
       {/* Main Page Sections Container */}
-      <main className="flex-1">
+      <main className="flex-1" role="main" aria-label="Konten utama portal DKM Masjid Raya Puri Telukjambe">
 
         {/* H. Hero Banner with background */}
         <HeroSection
@@ -368,7 +368,7 @@ export default function App() {
       </main>
 
       {/* Footer Branding, sitemaps and legal credits */}
-      <footer className="bg-emerald-950 text-white border-t border-emerald-900">
+      <footer className="bg-emerald-950 text-white border-t border-emerald-900" role="contentinfo" aria-label="Informasi kontak dan navigasi DKM Masjid Raya Puri Telukjambe">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8.5">
@@ -469,13 +469,13 @@ export default function App() {
 
             {/* Footer Column 4: Operational Notice */}
             <div className="space-y-3 bg-emerald-900/35 border border-emerald-800/40 p-4.5 rounded-2xl">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400">Seksi Sekretariat</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400">Sekretariat menerima saran dan masukan</h4>
               <p className="text-xs text-emerald-200/70 leading-relaxed">
-                Kantor kesekretariatan DKM Masjid raya puri telukjambe melayani administrasi berkas walimah, pendaftaran jamaah mabit, dan verifikasi kas masuk setiap hari kerja pukul 08:30 - 16:30 WIB.
+                Kantor sekertariat DKM Masjid Raya Puri Telukjambe menerima saran dan masukan untuk perkembangan terbaik masjid tiap hari kerja pukul 08:30 – 16:30 WIB.
               </p>
-              <div className="text-[10px] text-amber-300 font-bold bg-emerald-900 border border-emerald-800 p-2 rounded text-center">
-                ● Layanan Jamaah Siaga 24 Jam
-              </div>
+              <a href="https://forms.gle/3JxrimyLqbBcJ3kG8" target="_blank" rel="noopener noreferrer" className="inline-block w-full text-center text-[14px] text-amber-400 font-bold border-1 border-amber-400 hover:bg-amber-400 hover:text-emerald-900 transition-colors duration-300 p-2 rounded">
+                ● Silahkan Klik untuk menyampaikan saran & masukan
+              </a>
             </div>
 
           </div>
